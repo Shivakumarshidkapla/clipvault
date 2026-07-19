@@ -7,3 +7,11 @@ class UserAlreadyExistsException(HTTPException):
             status_code=status.HTTP_409_CONFLICT,
             detail=detail,
         )
+
+
+class InvalidCredentialsException(HTTPException):
+    def __init__(self):
+        super().__init__(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password.",
+        )

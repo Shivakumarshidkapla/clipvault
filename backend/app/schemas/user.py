@@ -25,3 +25,12 @@ class UserResponse(BaseModel):
     model_config = ConfigDict(
         from_attributes=True,
     )
+
+class UserLoginRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"

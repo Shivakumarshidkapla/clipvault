@@ -1,10 +1,21 @@
 from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
 
-from app.core.exceptions import UserAlreadyExistsException
+from app.core.exceptions import (
+    InvalidCredentialsException,
+    UserAlreadyExistsException,
+)
 from app.core.security import hash_password
 from app.models.user import User
 from app.schemas.user import UserRegisterRequest
+from app.core.security import (
+    create_access_token,
+    verify_password,
+)
+from app.schemas.user import (
+    TokenResponse,
+    UserLoginRequest,
+)
 
 
 def register_user(
@@ -37,3 +48,30 @@ def register_user(
     db.refresh(user)
 
     return user
+
+
+def login_user(
+    db: Session,
+    user_data: UserLoginRequest,
+) -> TokenResponse:
+
+    user = db.execute(
+        select(User).where(
+            User.email == user_data.email
+        )
+    ).scalar_one_or_none()
+
+    if not user:
+        raise InvalidCredentialsException()
+
+    if not verify_password(
+        user_data.password,
+        user.hashed_password,
+    ):
+        raise InvalidCredentialsException()
+
+    token = create_access_token(str(user.id))
+
+    return TokenResponse(
+        access_token=token,
+    )
