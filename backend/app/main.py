@@ -4,11 +4,13 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.database.dependencies import get_db
+from app.routers.auth import router as auth_router
 
 app = FastAPI(
     title=settings.app_name,
     version=settings.app_version,
 )
+app.include_router(auth_router)
 
 
 @app.get("/")
