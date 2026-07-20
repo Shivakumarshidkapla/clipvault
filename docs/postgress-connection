@@ -1,0 +1,8 @@
+Different PostgreSQL installations authenticate differently:
+
+Homebrew on macOS
+Docker
+Ubuntu
+AWS RDS
+
+Using the wrong connection string leads to confusing authentication errors.

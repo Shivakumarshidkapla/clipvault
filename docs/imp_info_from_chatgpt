@@ -1,0 +1,16 @@
+echo=settings.debug
+
+Since:
+
+DEBUG=True
+
+SQLAlchemy will print SQL queries to the terminal.
+
+Very useful while developing.
+
+Later, in production:
+
+DEBUG=False
+
+No code changes needed.
+
