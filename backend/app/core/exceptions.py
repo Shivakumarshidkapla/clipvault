@@ -15,3 +15,17 @@ class InvalidCredentialsException(HTTPException):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid email or password.",
         )
+
+class ClipboardNotFoundException(HTTPException):
+    def __init__(self):
+        super().__init__(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Clipboard not found.",
+        )
+
+class InvalidShareCodeException(HTTPException):
+    def __init__(self):
+        super().__init__(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Shared clipboard not found.",
+        )

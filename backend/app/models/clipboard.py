@@ -1,14 +1,14 @@
 from datetime import datetime
 from uuid import uuid4
 
-from sqlalchemy import DateTime, String
+from sqlalchemy import DateTime, ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database.base import Base
 
 
-class User(Base):
-    __tablename__ = "users"
+class Clipboard(Base):
+    __tablename__ = "clipboards"
 
     id: Mapped[str] = mapped_column(
         String(36),
@@ -16,20 +16,24 @@ class User(Base):
         default=lambda: str(uuid4()),
     )
 
-    username: Mapped[str] = mapped_column(
-        String(50),
-        unique=True,
+    title: Mapped[str] = mapped_column(
+        String(255),
         nullable=False,
     )
 
-    email: Mapped[str] = mapped_column(
-        String(255),
-        unique=True,
+    content: Mapped[str] = mapped_column(
+        Text,
         nullable=False,
     )
 
-    hashed_password: Mapped[str] = mapped_column(
-        String(255),
+    share_code: Mapped[str | None] = mapped_column(
+        String(20),
+        unique=True,
+        nullable=True,
+    )
+
+    owner_id: Mapped[str] = mapped_column(
+        ForeignKey("users.id"),
         nullable=False,
     )
 
@@ -46,7 +50,6 @@ class User(Base):
         nullable=False,
     )
 
-    clipboards: Mapped[list["Clipboard"]] = relationship(
-    back_populates="owner",
-    cascade="all, delete-orphan",
+    owner: Mapped["User"] = relationship(
+    back_populates="clipboards",
     )
