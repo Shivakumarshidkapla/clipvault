@@ -1,11 +1,16 @@
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 import { createClipboard } from "@/services/clipboardService";
+import {
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 
 type Props = {
     onCreated: () => void;
@@ -17,8 +22,8 @@ export default function CreateClipboardDialog({
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-
     const [loading, setLoading] = useState(false);
+    const [open, setOpen] = useState(false);
 
     async function handleCreate() {
 
@@ -39,6 +44,7 @@ export default function CreateClipboardDialog({
             setContent("");
 
             onCreated();
+            setOpen(false);
 
         } finally {
 
@@ -50,42 +56,59 @@ export default function CreateClipboardDialog({
 
     return (
 
-        <Card className="p-6 space-y-4">
-
-            <h2 className="text-2xl font-bold">
-                New Clipboard
-            </h2>
-
-            <Input
-                placeholder="Title"
-                value={title}
-                onChange={(e) =>
-                    setTitle(e.target.value)
+        <Dialog
+            open={open}
+            onOpenChange={setOpen}
+        >
+    
+            <DialogTrigger
+                render={
+                    <Button>
+                        + New Clipboard
+                    </Button>
                 }
             />
-
-            <Textarea
-                placeholder="Content"
-                value={content}
-                onChange={(e) =>
-                    setContent(e.target.value)
-                }
-            />
-
-            <Button
-                className="w-full"
-                onClick={handleCreate}
-                disabled={loading}
-            >
-                {
-                    loading
-                        ? "Creating..."
-                        : "Create Clipboard"
-                }
-            </Button>
-
-        </Card>
-
+    
+            <DialogContent className="space-y-6">
+    
+                <DialogTitle className="text-2xl">
+    
+                    New Clipboard
+    
+                </DialogTitle>
+    
+                <Input
+                    placeholder="Title"
+                    value={title}
+                    onChange={(e) =>
+                        setTitle(e.target.value)
+                    }
+                />
+    
+                <Textarea
+                    placeholder="Content"
+                    value={content}
+                    onChange={(e) =>
+                        setContent(e.target.value)
+                    }
+                />
+    
+                <Button
+                    className="w-full"
+                    onClick={handleCreate}
+                    disabled={loading}
+                >
+                    {
+                        loading
+                            ? "Creating..."
+                            : "Create Clipboard"
+                    }
+                </Button>
+    
+            </DialogContent>
+    
+        </Dialog>
+    
     );
 
 }

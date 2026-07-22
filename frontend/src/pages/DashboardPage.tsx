@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 
-
+import Navbar from "@/components/layout/Navbar";
 import CreateClipboardDialog from "@/components/clipboard/CreateClipboardDialog";
+import ClipboardCard from "@/components/clipboard/ClipboardCard";
 
-import { getClipboards } from "@/services/clipboardService";
+import {
+    getClipboards,
+    deleteClipboard,
+} from "@/services/clipboardService";
 
 import type { Clipboard } from "@/types/clipboard";
-import ClipboardCard from "@/components/clipboard/ClipboardCard";
-import { deleteClipboard } from "@/services/clipboardService";
 
 export default function DashboardPage() {
 
@@ -25,9 +27,9 @@ export default function DashboardPage() {
     async function handleDelete(id: string) {
 
         await deleteClipboard(id);
-    
+
         loadClipboards();
-    
+
     }
 
     useEffect(() => {
@@ -38,44 +40,80 @@ export default function DashboardPage() {
 
     return (
 
-        <div className="max-w-5xl mx-auto p-8 space-y-8">
+        <>
 
-            <h1 className="text-4xl font-bold">
+            <Navbar />
 
-                My Clipboards
+            <div className="max-w-6xl mx-auto px-6 py-10">
 
-            </h1>
+                <div className="flex items-center justify-between mb-10">
 
-            <CreateClipboardDialog
-                onCreated={loadClipboards}
-            />
+                    <div>
 
-            {
-                clipboards.length === 0 ? (
+                        <h1 className="text-4xl font-bold tracking-tight">
 
-                    <p className="text-gray-500">
+                            Dashboard
 
-                        No clipboards found.
+                        </h1>
 
-                    </p>
+                        <p className="text-muted-foreground mt-2">
 
-                ) : (
+                            Manage your personal clipboards.
 
-                    clipboards.map((clipboard) => (
+                        </p>
 
-                        <ClipboardCard
-    key={clipboard.id}
-    clipboard={clipboard}
-    onDelete={handleDelete}
-    onUpdated={loadClipboards}
-/>
+                    </div>
 
-                    ))
+                    <CreateClipboardDialog
+                        onCreated={loadClipboards}
+                    />
 
-                )
-            }
+                </div>
 
-        </div>
+                {
+                    clipboards.length === 0 ? (
+
+                        <div className="border rounded-xl p-12 text-center">
+
+                            <h2 className="text-xl font-semibold">
+
+                                No clipboards yet
+
+                            </h2>
+
+                            <p className="text-muted-foreground mt-2">
+
+                                Click <strong>New Clipboard</strong> to create your first clipboard.
+
+                            </p>
+
+                        </div>
+
+                    ) : (
+
+                        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+                            {
+                                clipboards.map((clipboard) => (
+
+                                    <ClipboardCard
+                                        key={clipboard.id}
+                                        clipboard={clipboard}
+                                        onDelete={handleDelete}
+                                        onUpdated={loadClipboards}
+                                    />
+
+                                ))
+                            }
+
+                        </div>
+
+                    )
+                }
+
+            </div>
+
+        </>
 
     );
 

@@ -5,7 +5,7 @@ import PublicClipboardPage from "../pages/PublicClipboardPage";
 import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/DashboardPage";
 import RegisterPage from "@/pages/RegisterPage";
-
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 
 export const router = createBrowserRouter([
@@ -23,7 +23,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardPage />,
+    element: (
+        <ProtectedRoute>
+            <DashboardPage />
+        </ProtectedRoute>
+    ),
   },
   {
     path: "/register",

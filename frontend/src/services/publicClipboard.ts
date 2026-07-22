@@ -17,7 +17,7 @@ export async function getPublicClipboard(
     code: string,
 ) {
     const response = await api.get(
-        `/public/${code}`,
+        `/clip/${code}`,
     );
 
     return response.data;

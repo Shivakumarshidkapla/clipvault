@@ -3,6 +3,7 @@ import { useState } from "react";
 import ClipboardSuccess from "@/components/clipboard/ClipboardSuccess";
 import OpenClipboardCard from "@/components/clipboard/OpenClipboardCard";
 import ShareClipboardCard from "@/components/clipboard/ShareClipboardCard";
+import AuthCard from "@/components/home/AuthCard";
 
 export default function HomePage() {
 
@@ -28,6 +29,7 @@ export default function HomePage() {
         <ClipboardSuccess
           shareCode={shareCode}
         />
+        <AuthCard />
 
         <OpenClipboardCard />
 

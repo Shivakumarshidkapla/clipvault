@@ -54,3 +54,16 @@ export async function updateClipboard(
     return response.data;
 
 }
+
+export async function shareClipboard(
+    clipboardId: string,
+) {
+
+    const response =
+        await api.post(
+            `/clipboards/${clipboardId}/share`
+        );
+
+    return response.data;
+
+}

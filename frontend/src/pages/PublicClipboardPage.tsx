@@ -27,31 +27,35 @@ export default function PublicClipboardPage() {
     }, [code]);
 
     return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-100">
 
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="w-full max-w-3xl">
 
-            <div className="max-w-xl w-full">
+            <div className="rounded-xl bg-white border shadow-sm p-8">
 
-            <div
-  style={{
-    color: "red",
-    fontWeight: 900,
-    fontSize: "48px",
-  }}
->
-  Shared Clipboard
-</div>
+                <h1 className="text-4xl font-bold text-center">
+
+                    Shared Clipboard
+
+                </h1>
+
+                <p className="text-center text-muted-foreground mt-3 mb-8">
+
+                    View-only shared clipboard
+
+                </p>
 
                 <textarea
                     readOnly
                     value={content}
-                    className="w-full border rounded-lg p-4 h-80"
+                    className="min-h-[350px] resize-none"
                 />
 
             </div>
 
         </div>
 
-    );
+    </div>
+);
 
 }
