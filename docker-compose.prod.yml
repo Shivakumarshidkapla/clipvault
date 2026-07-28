@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+
+  postgres:
+
+    image: postgres:17
+
+    container_name: clipvault-postgres
+
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: clipvault
+      POSTGRES_USER: clipvault
+      POSTGRES_PASSWORD: password
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  backend:
+
+    image: YOUR_DOCKERHUB_USERNAME/clipvault-backend:latest
+
+    container_name: clipvault-backend
+
+    restart: unless-stopped
+
+    environment:
+      DATABASE_URL: postgresql+psycopg://clipvault:password@postgres:5432/clipvault
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      - postgres
+
+  frontend:
+
+    image: YOUR_DOCKERHUB_USERNAME/clipvault-frontend:latest
+
+    container_name: clipvault-frontend
+
+    restart: unless-stopped
+
+    ports:
+      - "80:80"
+
+    depends_on:
+      - backend
+
+volumes:
+
+  postgres-data:

@@ -6,21 +6,30 @@ import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/DashboardPage";
 import RegisterPage from "@/pages/RegisterPage";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import GuestRoute from "@/components/auth/GuestRoute";
 
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-  },
+    {
+        path: "/",
+        element: (
+            <GuestRoute>
+                <HomePage />
+            </GuestRoute>
+        ),
+    },
   {
     path: "/public/:code",
     element: <PublicClipboardPage />,
   },
   {
     path: "/login",
-    element: <LoginPage />,
-  },
+    element: (
+        <GuestRoute>
+            <LoginPage />
+        </GuestRoute>
+    ),
+},
   {
     path: "/dashboard",
     element: (
@@ -31,6 +40,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <RegisterPage />,
-  },
+    element: (
+        <GuestRoute>
+            <RegisterPage />
+        </GuestRoute>
+    ),
+},
 ]);

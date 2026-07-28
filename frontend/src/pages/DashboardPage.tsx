@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import CreateClipboardDialog from "@/components/clipboard/CreateClipboardDialog";
 import ClipboardCard from "@/components/clipboard/ClipboardCard";
+import OpenSharedClipboardCard from "@/components/clipboard/OpenSharedClipboardCard";
 
 import {
     getClipboards,
@@ -46,7 +47,7 @@ export default function DashboardPage() {
 
             <div className="max-w-6xl mx-auto px-6 py-10">
 
-                <div className="flex items-center justify-between mb-10">
+                <div className="flex justify-between items-start mb-10">
 
                     <div>
 
@@ -56,6 +57,12 @@ export default function DashboardPage() {
 
                         </h1>
 
+                        <div className="mb-8">
+    <OpenSharedClipboardCard
+        onImported={loadClipboards}
+    />
+</div>
+
                         <p className="text-muted-foreground mt-2">
 
                             Manage your personal clipboards.
@@ -64,9 +71,13 @@ export default function DashboardPage() {
 
                     </div>
 
-                    <CreateClipboardDialog
-                        onCreated={loadClipboards}
-                    />
+                    <div className="ml-8 flex-shrink-0">
+
+    <CreateClipboardDialog
+        onCreated={loadClipboards}
+    />
+
+</div>
 
                 </div>
 

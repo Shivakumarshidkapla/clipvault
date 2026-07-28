@@ -4,10 +4,27 @@ import ClipboardSuccess from "@/components/clipboard/ClipboardSuccess";
 import OpenClipboardCard from "@/components/clipboard/OpenClipboardCard";
 import ShareClipboardCard from "@/components/clipboard/ShareClipboardCard";
 import AuthCard from "@/components/home/AuthCard";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
 
   const [shareCode, setShareCode] = useState("");
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const TOKEN_KEY = "clipvault_token";
+
+const token = localStorage.getItem(TOKEN_KEY);
+
+    
+
+    if (token) {
+        navigate("/dashboard");
+    }
+
+}, [navigate]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100">

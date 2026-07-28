@@ -48,3 +48,5 @@ def root():
 def database_health(db: Session = Depends(get_db)):
     db.execute(text("SELECT 1"))
     return {"status": "Database connection successful"}
+
+

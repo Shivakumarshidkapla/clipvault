@@ -1,29 +1,55 @@
+# ==========================
 # Python
+# ==========================
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyd
 
 # Virtual Environment
 .venv/
+venv/
 
+# Python Tool Caches
+.pytest_cache/
+.mypy_cache/
+
+# ==========================
 # Environment Variables
+# ==========================
 .env
+.env.*
 
+# ==========================
 # macOS
+# ==========================
 .DS_Store
 
+# ==========================
 # VS Code
+# ==========================
 .vscode/
 
-# Pytest
-.pytest_cache/
-
+# ==========================
 # Coverage
+# ==========================
 .coverage
 htmlcov/
 
-# Node (future frontend)
+# ==========================
+# Node
+# ==========================
 node_modules/
 
-# Build
+# Build Output
 dist/
 build/
+
+# ==========================
+# Logs
+# ==========================
+*.log
+
+# ==========================
+# Local Database Dumps
+# ==========================
+*.sql
