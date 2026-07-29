@@ -105,7 +105,4 @@ Answer:
 
 The CMD instruction in a Dockerfile defines the default command that will run when a container starts. If a container is started using docker run, Docker executes this default command. However, Docker Compose allows the command field to override the Dockerfile's CMD. This is useful because the same image can be used in different environments. In development, Docker Compose overrides the command to start Uvicorn with the --reload option for automatic code reloading. In production, no override is provided, so Docker executes the default CMD from the Dockerfile, starting the application without development-specific options. This keeps the Docker image production-ready while allowing different runtime behaviour during development.
 
-What is the purpose of a Git tag?
-Answer
 
-A Git tag is a permanent reference to a specific commit in the repository. Unlike branches, which move forward as new commits are added, a tag always points to the same commit. Tags are commonly used to mark releases such as v1.0.0 or v2.0.0, making it easy to identify, deploy, or roll back to a stable version of the application. In modern CI/CD pipelines, Git tags are often used to trigger release workflows and version Docker images, ensuring that the source code, Docker image, and deployed application all correspond to the same version.

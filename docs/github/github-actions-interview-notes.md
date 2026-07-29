@@ -1,3 +1,9 @@
+What is the purpose of a Git tag?
+Answer
+
+A Git tag is a permanent reference to a specific commit in the repository. Unlike branches, which move forward as new commits are added, a tag always points to the same commit. Tags are commonly used to mark releases such as v1.0.0 or v2.0.0, making it easy to identify, deploy, or roll back to a stable version of the application. In modern CI/CD pipelines, Git tags are often used to trigger release workflows and version Docker images, ensuring that the source code, Docker image, and deployed application all correspond to the same version.
+
+
 Q. What is GitHub Actions?
 
 Answer:
@@ -27,3 +33,30 @@ Q. Why is actions/checkout usually the first step in a GitHub Actions workflow?
 Answer
 
 actions/checkout downloads the repository's source code onto the GitHub Actions runner. Since each runner starts as a clean virtual machine without the project's files, checking out the repository is typically the first step so that subsequent steps—such as building, testing, or packaging the application—have access to the source code.
+
+
+What is Docker Buildx?
+
+Answer:
+
+Docker Buildx is Docker's extended build tool that provides advanced image-building capabilities beyond the traditional docker build command. It supports features such as multi-platform builds, improved build caching, and integration with BuildKit. In GitHub Actions, it is commonly configured before building and pushing Docker images.
+
+Interview Question ⭐⭐⭐⭐⭐
+Q. Why are GitHub Secrets used for Docker Hub login?
+
+Answer:
+
+GitHub Secrets securely store sensitive values such as usernames, access tokens, and API keys. During a workflow run, GitHub injects these values into the runner without exposing them in the repository. This allows workflows to authenticate with external services like Docker Hub while keeping credentials secure.
+
+Q. What's the difference between configuration and secrets?
+
+Answer:
+
+Configuration consists of application settings that define how software behaves, such as ports, log levels, or hostnames. Secrets are sensitive configuration values—such as passwords, API keys, and access tokens—that must be protected from unauthorized access. While configuration may be stored in configuration files or environment variables, secrets should be stored in a secure secret management solution like GitHub Secrets, AWS Secrets Manager, or HashiCorp Vault and injected into the application or workflow at runtime.
+
+What is the difference between context and file in a Docker build?
+
+Answer:
+
+context specifies the directory whose contents are sent to Docker during the build. It determines which files are available to COPY and ADD instructions in the Dockerfile.
+file specifies which Dockerfile Docker should use for the build. It allows you to use a Dockerfile with a custom name or location, such as Dockerfile.prod.
