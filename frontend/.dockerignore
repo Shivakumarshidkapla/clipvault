@@ -5,7 +5,7 @@ dist/
 .git/
 .gitignore
 
-.env
+
 
 .vscode/
 
