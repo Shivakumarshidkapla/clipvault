@@ -20,7 +20,7 @@ services:
 
   backend:
 
-    image: YOUR_DOCKERHUB_USERNAME/clipvault-backend:latest
+    image: shivakumarshidkapla/clipvault-backend:latest
 
     container_name: clipvault-backend
 
@@ -37,7 +37,7 @@ services:
 
   frontend:
 
-    image: YOUR_DOCKERHUB_USERNAME/clipvault-frontend:latest
+    image: shivakumarshidkapla/clipvault-frontend:latest
 
     container_name: clipvault-frontend
 
