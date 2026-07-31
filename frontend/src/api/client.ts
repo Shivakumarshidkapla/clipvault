@@ -3,7 +3,7 @@ import axios from "axios";
 const TOKEN_KEY = "clipvault_token";
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: "/api",
 });
 
 api.interceptors.request.use((config) => {

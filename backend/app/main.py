@@ -18,11 +18,6 @@ app = FastAPI(
     version=settings.app_version,
 )
 
-app = FastAPI(
-    title=settings.app_name,
-    version=settings.app_version,
-)
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -34,11 +29,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth_router)
-app.include_router(users_router)
-app.include_router(clipboard_router)
-app.include_router(public_router)
-app.include_router(public_clipboard_router)
+app.include_router(auth_router, prefix="/api")
+app.include_router(users_router, prefix="/api")
+app.include_router(clipboard_router, prefix="/api")
+app.include_router(public_router, prefix="/api")
+app.include_router(public_clipboard_router, prefix="/api")
 
 @app.get("/")
 def root():
