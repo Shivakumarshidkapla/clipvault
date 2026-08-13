@@ -223,6 +223,6 @@ Shivakumar Shidkapla
 
 Master's Student – Cybersecurity (HDBW)
 
-IT Administrator | DevOps & Cloud Enthusiast
+DevOps & Cloud Enthusiast
 
-Munich, Germany s
+Munich, Germany
