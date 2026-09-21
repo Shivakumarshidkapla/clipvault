@@ -106,3 +106,28 @@ Answer:
 The CMD instruction in a Dockerfile defines the default command that will run when a container starts. If a container is started using docker run, Docker executes this default command. However, Docker Compose allows the command field to override the Dockerfile's CMD. This is useful because the same image can be used in different environments. In development, Docker Compose overrides the command to start Uvicorn with the --reload option for automatic code reloading. In production, no override is provided, so Docker executes the default CMD from the Dockerfile, starting the application without development-specific options. This keeps the Docker image production-ready while allowing different runtime behaviour during development.
 
 
+Interview Question
+
+Why do we use both of these volume mounts?
+
+volumes:
+  - ./frontend:/app
+  - /app/node_modules
+Short Interview Answer (1–2 minutes)
+
+We bind mount the source code (./frontend:/app) so that changes on the host are immediately reflected inside the container, enabling hot reloading during development.
+
+However, this bind mount would also overwrite the node_modules directory that was installed inside the Docker image. To prevent that, we create a separate anonymous volume for /app/node_modules. This keeps the container's dependencies isolated from the host while still allowing the application source code to stay synchronized.
+
+This avoids issues caused by platform-specific dependencies and ensures that packages installed inside the container remain available.
+
+That answer is already strong enough for most interviews.
+
+
+If an interviewer asks:
+
+"How do these two mounts work together?"
+
+A strong answer is:
+
+During the image build, Docker installs all dependencies into /app/node_modules. When the container starts, the bind mount ./frontend:/app replaces the /app directory with the host's source code, which would hide the installed dependencies. The second mount, /app/node_modules, creates a Docker-managed volume at that path. On its first creation, Docker populates the volume with the node_modules directory from the image, so the application uses Linux-compatible dependencies while still allowing the source code to be edited live from the host. This combines fast development with isolated, container-specific dependencies.
