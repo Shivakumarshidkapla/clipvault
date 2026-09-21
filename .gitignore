@@ -52,3 +52,5 @@ build/
 # Local Database Dumps
 # ==========================
 *.sql
+
+bugs_list.txt
